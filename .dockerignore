@@ -1,0 +1,5 @@
+.env
+init.sql
+.dockerignore
+node_modules
+README
