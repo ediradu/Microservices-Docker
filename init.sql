@@ -1,0 +1,23 @@
+CREATE TABLE IF NOT EXISTS countries (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE,
+    latitude DOUBLE PRECISION NOT NULL,
+    longitude DOUBLE PRECISION NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS cities (
+    id SERIAL PRIMARY KEY,
+    country_id INT NOT NULL REFERENCES countries(id),
+    name VARCHAR(100) NOT NULL,
+    latitude DOUBLE PRECISION NOT NULL,
+    longitude DOUBLE PRECISION NOT NULL,
+    UNIQUE (country_id, name)
+);
+
+CREATE TABLE IF NOT EXISTS temperatures (
+    id SERIAL PRIMARY KEY,
+    city_id INT NOT NULL REFERENCES cities(id),
+    value DOUBLE PRECISION NOT NULL,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    UNIQUE (city_id, timestamp)
+);
